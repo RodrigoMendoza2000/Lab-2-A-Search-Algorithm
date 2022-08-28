@@ -43,8 +43,8 @@ def successors(frame: Frame) -> list[Frame]:
     """
 
     flat: tuple[int, ...] = tuple(i for tup in frame for i in tup)
-    rows = len(frame)
-    columns = len(frame[0])
+    rows: int = len(frame)
+    columns: int = len(frame[0])
     zero_index: int = flat.index(0)
 
     def swap(i1: int, i2: int) -> Frame:
@@ -106,7 +106,7 @@ def solve_puzzle(frame: Frame) -> None:
             flat_next: tuple[int, ...] = \
                 tuple(k for tup in path[i + 1] for k in tup)
 
-            columns = len(frame[0])
+            columns: int = len(frame[0])
             zero_index: int = flat.index(0)
             zero_index_next: int = flat_next.index(0)
 
