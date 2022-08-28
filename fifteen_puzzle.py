@@ -1,3 +1,13 @@
+# ----------------------------------------------------------
+# Lab #2: A* Search Algorithm
+# Solving the 15 puzzle.
+#
+# Date: 26-Aug-2022
+# Authors:
+#           A01745446 Sergio Manuel Gonzalez Vargas
+#           A01720627 Rodrigo Alfredo Mendoza España
+# ----------------------------------------------------------
+
 # File: fifteen_puzzle.py
 
 from typing import Optional
@@ -6,14 +16,29 @@ from generic_search import astar, Node, node_to_path
 Frame = tuple[tuple[int, ...], ...]
 
 def goal_test(frame: Frame) -> bool:
-    """Is this the goal frame?"""
+    """Determine if the frame is the goal frame
+
+    Args:
+        frame (Frame): a tuple of tuples that represents the frame
+
+    Returns:
+        bool: Returns true if the input frame is equal to the goal configuration, otherwise returns false.
+    """
     flat: tuple[int, ...] = tuple(i for tup in frame for i in tup)
     goal: tuple[int, ...] = tuple(range(1, len(flat))) + (0,)
-    return flat == goal  # type: ignore
+    return flat == goal
 
 
 def successors(frame: Frame) -> list[Frame]:
-    """Return a list of valid successors to this frame."""
+    """Returns a list with all the possible frame configurations that are one move away from the input frame.
+
+    Args:
+        frame (Frame): a tuple of tuples that represents the frame
+
+    Returns:
+        list[Frame]: a list of all valid successors to the entered frame
+    """
+    
     flat: tuple[int, ...] = tuple(i for tup in frame for i in tup)
     rows = len(frame)
     columns = len(frame[0])
@@ -36,7 +61,14 @@ def successors(frame: Frame) -> list[Frame]:
 
 
 def heuristic(frame: Frame) -> float:
-    """Return the heuristic value for a given frame."""
+    """Return the heuristic value for a given frame.
+
+    Args:
+        frame (Frame): a tuple of tuples that represents the frame
+
+    Returns:
+        float: The amount of numbers that are NOT in their final position
+    """
     flat: tuple[int, ...] = tuple(i for tup in frame for i in tup)
     goal: tuple[int, ...] = tuple(range(1, len(flat))) + (0,)
     
